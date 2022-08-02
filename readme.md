@@ -60,3 +60,18 @@ Errors
 ```
 sudo apt-get install $(apt-cache --names-only search ^gstreamer1.0-* | awk '{print $1}' | grep -v gstreamer1.0-hybris | grep -v gstreamer1.0-python3-dbg-plugin-loader)
 ```
+
+# GStreamer with OSX
+
+## Installation
+```
+brew install gstreamer gst-plugins-base gst-plugins-good gst-rtsp-server gst-devtools gst-plugins-bad gst-libav
+```
+
+## Command Line
+**Gstreamer Test**
+```
+
+```
+
+**GStreamer List Devices**
