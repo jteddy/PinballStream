@@ -62,11 +62,14 @@ sudo apt-get install $(apt-cache --names-only search ^gstreamer1.0-* | awk '{pri
 ```
 
 # GStreamer with OSX
-
 ## Installation
+- Install XCode
+- Install brew
 ```
-brew install gstreamer gst-plugins-base gst-plugins-good gst-rtsp-server gst-devtools gst-plugins-bad gst-libav
+brew install gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-plugins-ugly gst-rtsp-server gst-devtools gst-libav gst-plugins-rs ffmpeg gst-ffmpeg
 ```
+
+export PATH=$PATH:/Library/Frameworks/GStreamer.framework/Versions/1.0/bin 
 
 ## Command Line
 **Gstreamer Test**
