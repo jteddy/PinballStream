@@ -146,6 +146,45 @@ gst-launch-1.0 -v -e v4l2src device=/dev/video4 ! queue ! video/x-h264,width=320
 udpsrc port=8554 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264, payload=(int)96" !  rtph264depay ! h264parse ! avdec_h264 ! video.
 ```
 
+# Logitech Brio RTSP
+The Logitech Brio only supports 60 FPS with MJPG
+**Test Web Cam**
+
+```
+gst-launch-1.0 v4l2src device=/dev/video6  'image/jpeg, width=1920, height=1080, framerate=60/1, format=MJPG' ! jpegdec ! xvimagesink
+```
+
+**Logitech Brio - RTSP Stream - Server (encoder)**
+
+```
+gst-launch-1.0 v4l2src device=/dev/video6 ! queue !'image/jpeg, width=1920, height=1080, framerate=60/1, format=MJPG' ! jpegparse ! rtpjpegpay ! udpsink host=192.168.1.54 port=8555
+```
+**Logitech Brio - RTSP Stream - Client (decoder / OBS)**
+
+```
+udpsrc port=8555 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)JPEG, payload=(int)26" !  rtpjpegdepay ! jpegparse ! jpegdec ! video.
+```
+
+
+
+## YUYV 30fps
+**Test Web Cam**
+
+```
+gst-launch-1.0 -v -e v4l2src device=/dev/video6 ! video/x-raw,format=YUY2,width=1920,height=1080,framerate=30/1 ! videoconvert ! autovideosink
+```
+
+**Brio Server / Encoder**
+
+```
+gst-launch-1.0 -v -e v4l2src device=/dev/video6 ! video/x-raw,format=YUY2,width=1920,height=1080,framerate=30/1 ! videoconvert ! x265enc ! h265parse ! rtph265pay ! udpsink host=192.168.1.54 port=8555
+```
+
+**Brio Client - Decoder / OBS**
+
+```
+udpsrc port=8555 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H265, payload=(int)96" ! rtph265depay ! h265parse ! avdec_h265 ! video.
+```
 
 # Appendix
 ## Resources
