@@ -69,5 +69,22 @@ export PATH=$PATH:/Library/Frameworks/GStreamer.framework/Versions/1.0/bin
 
 # Gsteamer
 **List Devices**
+```
+v4l2-ctl --list-devices
+```
+**List Supported Formats**
+```
+v4l2-ctl --list-formats
+```
+**List Supported Format Extensions**
+```
+v4l2-ctl --list-formats-ext
+```
 
-**Test Gstreamer**
+# Logitech C920
+```
+v4l2-ctl --list-devices
+v4l2-ctl --device /dev/video4
+v4l2-ctl --device /dev/video4 --list-formats
+v4l2-ctl --device /dev/video4 --list-formats-ext
+```
