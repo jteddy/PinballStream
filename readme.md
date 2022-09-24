@@ -186,6 +186,25 @@ gst-launch-1.0 -v -e v4l2src device=/dev/video6 ! video/x-raw,format=YUY2,width=
 udpsrc port=8555 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H265, payload=(int)96" ! rtph265depay ! h265parse ! avdec_h265 ! video.
 ```
 
+# OBS Configs
+## Brio - MJPG
+```
+udpsrc port=8555 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)JPEG, payload=(int)26" !  rtpjpegdepay ! jpegparse ! jpegdec ! video.
+```
+## Brio - H265
+```
+udpsrc port=8555 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H265, payload=(int)96" ! rtph265depay ! h265parse ! avdec_h265 ! video.
+```
+## Brio - H264
+```
+udpsrc port=8555 caps="application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264, payload=(int)96" ! rtph264depay ! h264parse ! avdec_h264 ! video.
+```
+
+## C920
+```
+udpsrc port=8554 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264, payload=(int)96" !  rtph264depay ! h264parse ! avdec_h264 ! video.
+```
+
 # Appendix
 ## Resources
 - https://oz9aec.net/software/gstreamer/using-the-logitech-c920-webcam-with-gstreamer-12
