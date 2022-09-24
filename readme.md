@@ -56,6 +56,8 @@ sudo apt-get install -y gstreamer1.0*
 sudo apt-get install -y libgstreamer*
 sudo apt-get install -y ges*
 sudo apt-get install -y v4l*
+sudo apt-get install -y h264enc
+sudo apt-get install libopenh264-6 libopenh264-dev
 ```
 
 **Errors**
@@ -98,3 +100,23 @@ v4l2-ctl --device /dev/video4
 v4l2-ctl --device /dev/video4 --list-formats
 v4l2-ctl --device /dev/video4 --list-formats-ext
 ```
+
+**Test Web Cam Command**
+```
+gst-launch-1.0 -v -e v4l2src device=/dev/video4 ! queue ! video/x-h264,width=320,height=240,framerate=30/1 ! h264parse ! avdec_h264 ! xvimagesink sync=false
+```
+
+**RTP Unicast**
+```
+ gst-launch-1.0 -v udpsrc port=4000 caps='application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264'-e v4l2src device=/dev/video4 ! queue ! video/x-h264,width=320,height=240,framerate=30/1 ! h264parse ! avdec_h264 ! xvimagesink sync=false
+ 
+ 
+ gst-launch -v udpsrc port=4000 caps='application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264' ! 
+          rtph264depay ! ffdec_h264 ! xvimagesink sync=false
+          
+```
+
+
+# Appendix
+## Resources
+- https://oz9aec.net/software/gstreamer/using-the-logitech-c920-webcam-with-gstreamer-12
