@@ -28,40 +28,35 @@
 
 
 ## Tech
-
 ## GStreamer Windows Setup
-
 https://cosmostreamer.com/wiki/index.php?title=OBS_Gstreamer_plugin
-
-
-
 
 Windows USB Device Tree
 https://www.uwe-sieber.de/usbtreeview_e.html#download
 
-
-
-## Debian Build
+## Ubuntu Build
 
 ```bash
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get install -y openssh-server sudo adduser
-sudo adduser jt sudo
+sudo adduser pinball sudo
 sudo systemctl status ssh
-
-apt-get install -y libgstreamer1.0-dev libgstreamer-plugins-base1.0-dev libgstreamer-plugins-bad1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
 ```
 
+**Install Packages**
+``bash
+sudo apt-get install -y gstreamer1.0*
+sudo apt-get install -y libgstreamer*
+sudo apt-get install -y ges*
+```
 
-
-Errors
-
+**Errors**
 ```
 sudo apt-get install $(apt-cache --names-only search ^gstreamer1.0-* | awk '{print $1}' | grep -v gstreamer1.0-hybris | grep -v gstreamer1.0-python3-dbg-plugin-loader)
 ```
 
-# GStreamer with OSX
+## GStreamer with OSX
 ## Installation
 - Install XCode
 - Install brew
@@ -71,10 +66,7 @@ brew install gstreamer gst-plugins-base gst-plugins-good gst-plugins-bad gst-plu
 
 export PATH=$PATH:/Library/Frameworks/GStreamer.framework/Versions/1.0/bin 
 
-## Command Line
-**Gstreamer Test**
-```
+# Gsteamer
+**List Devices**
 
-```
-
-**GStreamer List Devices**
+**Test Gstreamer**
