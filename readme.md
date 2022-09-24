@@ -133,6 +133,19 @@ gst-launch-1.0 tcpclientsrc host=192.168.1.80 port=50001 ! application/x-rtp-str
 ```
 gst-launch-1.0 tcpclientsrc host=192.168.1.80 port=50001 ! application/x-rtp-stream,encoding-name=JPEG ! rtpstreamdepay ! rtpjpegdepay ! jpegdec ! autovideosink
 ```
+## C920 RTSP Stream
+
+**H264 Server (encoder)**
+
+```
+gst-launch-1.0 -v -e v4l2src device=/dev/video4 ! queue ! video/x-h264,width=320,height=240,framerate=30/1 ! h264parse ! rtph264pay ! udpsink host=192.168.1.54 port=8554
+```
+**H264 Client (decoder / OBS)**
+
+```
+udpsrc port=8554 caps = "application/x-rtp, media=(string)video, clock-rate=(int)90000, encoding-name=(string)H264, payload=(int)96" !  rtph264depay ! h264parse ! avdec_h264 ! video.
+```
+
 
 # Appendix
 ## Resources
