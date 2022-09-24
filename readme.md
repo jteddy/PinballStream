@@ -138,7 +138,7 @@ gst-launch-1.0 tcpclientsrc host=192.168.1.80 port=50001 ! application/x-rtp-str
 **H264 Server (encoder)**
 
 ```
-gst-launch-1.0 -v -e v4l2src device=/dev/video4 ! queue ! video/x-h264,width=320,height=240,framerate=30/1 ! h264parse ! rtph264pay ! udpsink host=192.168.1.54 port=8554
+gst-launch-1.0 -v -e v4l2src device=/dev/video4 ! queue ! video/x-h264,width=320,height=240,framerate=30/1 ! h264parse ! rtph264pay ! udpsink host=192.168.1.54 port=8554 sync=false
 ```
 **H264 Client (decoder / OBS)**
 
