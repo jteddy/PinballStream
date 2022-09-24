@@ -45,10 +45,11 @@ sudo systemctl status ssh
 ```
 
 **Install Packages**
-``bash
+```bash
 sudo apt-get install -y gstreamer1.0*
 sudo apt-get install -y libgstreamer*
 sudo apt-get install -y ges*
+sudo apt-get install -y v4l*
 ```
 
 **Errors**
