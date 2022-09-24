@@ -2,9 +2,9 @@
 
 - C920 - DMD
 - Logitech Bio - Playfield
-- Pete's Camera - Player Face
+- Pete's CamCorder - Player Face
 - GoPro - Venue Cam
-- 
+- Commentators Camera - ???
 
 ## USB Interface Standards
 
@@ -15,15 +15,15 @@
 | USB 3.1 Gen 2                   | 900 MB/s        |
 | Thunderbolt 3                   | 40 GBit/s       |
 
-## Cameras
+## Cameras Review
 
-| Camera            | Max Res                 | Bandwidth | Interface | RRP  |
-| ----------------- | ----------------------- | --------- | --------- | ---- |
-| Logitech C920     | 1080p30 / 720p30        |           | USB-A     |      |
-| Logitech C922 Pro | 1080p30 / 720p60        |           | USB-A     |      |
-| Logitech Brio 4k  | 4k30 / 1080p60 / 720p90 |           | USB-C     |      |
-| Elgato Facecam    | 1080p60 / 720p60        |           |           |      |
-| Sony CX-405       |                         |           |           | $280 |
+| Camera            | Max Res                 | Bandwidth | Interface             | RRP  |
+| ----------------- | ----------------------- | --------- | ---------             | ---- |
+| Logitech C920     | 1080p30 / 720p30        |           | USB-A                 |      |
+| Logitech C922 Pro | 1080p30 / 720p60        |           | USB-A                 |      |
+| Logitech Brio 4k  | 4k30 / 1080p60 / 720p90 |           | USB-C                 |      |
+| Elgato Facecam    | 1080p60 / 720p60        |           |                       |      |
+| Sony CX-405       | 1080p (50p-AU version)  |           | Mini-HDMI to HDMI/USB | $280 |
 
 ## Small Form Factor PCs
 
