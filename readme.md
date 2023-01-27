@@ -51,9 +51,21 @@ sudo apt-get install -y ges*
 sudo apt-get install -y v4l*
 sudo apt-get install -y h264enc
 sudo apt-get install -y libopenh264-6 libopenh264-dev
-sudo apt-get install -y ubuntu-restricted-extras screen stacer htop guvcview
-```
+sudo apt-get install -y ubuntu-restricted-extras screen stacer htop guvcview gnome-tweaks
 
+sudo apt-get install xfonts-75dpi
+sudo apt-get install xfonts-100dpi
+sudo apt-get install gnome-panel
+sudo apt-get install metacity
+sudo apt-get install light-themes
+```
+#### Troubleshooting
+
+If you receive any errors during the install try
+
+```bash
+sudo apt-get install $(apt-cache --names-only search ^gstreamer1.0-* | awk '{print $1}' | grep -v gstreamer1.0-hybris | grep -v gstreamer1.0-python3-dbg-plugin-loader)
+```
 ### Disable Power Saving Modes
 
 Turn off any power saving and sleep modes.
@@ -77,12 +89,98 @@ SUSPEND_METHODS="none"
 sudo /etc/init.d/acpid restart
 ```
 
-### Troubleshooting
+Use gnome-tweaks as there is an option there to disable it. This required a reboot
 
-If you receive any errors during the install try
+### Remote Desktop with VNC
 
 ```bash
-sudo apt-get install $(apt-cache --names-only search ^gstreamer1.0-* | awk '{print $1}' | grep -v gstreamer1.0-hybris | grep -v gstreamer1.0-python3-dbg-plugin-loader)
+sudo apt install tightvncserver
+sudo apt install xfce4 xfce4-goodies
+vncserver
+vncpasswd
+```
+
+```
+cat > ~/.vnc/xstartup
+```
+
+```
+#!/bin/sh
+
+unset SESSION_MANAGER
+unset DBUS_SESSION_BUS_ADDRESS
+
+export XKL_XMODMAP_DISABLE=1
+export XDG_CURRENT_DESKTOP="GNOME-Flashback:GNOME"
+export XDG_MENU_PREFIX="gnome-flashback-"
+
+
+[ -x /etc/vnc/xstartup ] && exec /etc/vnc/xstartup
+[ -r $HOME/.Xresources ] && xrdb $HOME/.Xresources
+xsetroot -solid grey
+vncconfig -iconic &
+
+gnome-session --builtin --session=gnome-flashback-metacity --disable-acceleration-check --debug &
+nautilus &
+gnome-terminal &
+
+```
+```
+sudo chmod +x ~/.vnc/xstartup
+```
+
+**Start VNC As A service**
+
+```
+sudo nano /etc/systemd/system/vncserver.service
+```
+
+
+```
+[Unit]
+Description=TightVNC server
+After=syslog.target network.target
+
+[Service]
+Type=forking
+User=jason
+Group=jason
+WorkingDirectory=/home/jason
+
+#PAMName=login
+PIDFile=/home/jason/.vnc/%H:1.pid
+ExecStartPre=-/usr/bin/vncserver -kill :1 > /dev/null 2>&1
+ExecStart=/usr/bin/vncserver -depth 24 -geometry 1280x1024
+ExecStop=/usr/bin/vncserver -kill :1
+
+[Install]
+WantedBy=multi-user.target
+
+```
+
+```
+sudo systemctl daemon-reload
+sudo systemctl enable --now vncserver
+sudo systemctl status vncserver
+```
+
+**Kill a session**
+
+vncserver -kill :1
+
+### Ubuntu Firewall
+
+```bash
+sudo ufw status
+sudo ufw disable
+```
+
+# Camera Controls
+```
+v4l2-ctl -d /dev/video10 --list-ctrls
+v4l2-ctl --device /dev/video10 --set-ctrl=pan_absolute=7000
+
+
 ```
 
 ## GStreamer OSX Setup
