@@ -52,6 +52,8 @@ sudo apt-get install -y v4l*
 sudo apt-get install -y h264enc
 sudo apt-get install -y libopenh264-6 libopenh264-dev
 sudo apt-get install -y ubuntu-restricted-extras screen stacer htop guvcview gnome-tweaks
+sudo apt-get install -y python3-pip
+!pip install termcolor
 
 sudo apt-get install xfonts-75dpi
 sudo apt-get install xfonts-100dpi
